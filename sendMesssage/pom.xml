@@ -1,0 +1,205 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cn.send.message</groupId>
+  <artifactId>sendMesssage</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+   <!-- 定义版本号 -->
+    <!-- <properties>
+	  	<spring.version>4.2.8.RELEASE</spring.version>
+	  	<hibernate.version>4.2.6.Final</hibernate.version>
+	  	<struts2.version>2.3.16.1</struts2.version>
+	  	<slf4j.version>1.7.5</slf4j.version>
+	  	<c3p0.version>0.9.1.2</c3p0.version>
+	  	<servlet.version>2.5</servlet.version>
+	  	<jsp.version>2.0</jsp.version>
+	  	<junit.version>4.11</junit.version>
+	  	<orcal.vertion>10.0</orcal.vertion>
+	  	<spring-date.version>1.10.4.RELEASE</spring-date.version>
+	  	<spring-data-redis.version>1.7.1.RELEASE</spring-data-redis.version>
+	  	反向生成实体类
+  		<hibernate-tools.version>3.2.4.GA</hibernate-tools.version>
+  		poi java解析和读取 office
+  		<poi.version>3.9</poi.version>
+  	    搜索引擎 全文检索
+  	    <hibernate-search.version>4.1.0.Final</hibernate-search.version> 
+  	    权限框架
+  	    <shiro.version>1.2.2</shiro.version> 
+  	    二级缓存框架
+  	    <ehcache.version>2.6.6</ehcache.version>
+  	    redis nosql 内存数据库 
+  	    <jedis.version>2.6.2</jedis.version>
+  	    消息队列 active  mq
+  	    <activemq.version>5.2.0</activemq.version>
+  	    <mysql-version>5.0.8</mysql-version>
+  	    
+  	    <aliyun-java-sdk-core.version>3.2.3</aliyun-java-sdk-core.version>
+  	    
+  	    <dayu-sendmsg.version>0.0.1</dayu-sendmsg.version>
+	    </properties>
+  
+  
+  <dependencies>
+  
+  	<dependency>
+  	spring 
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-aspects</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-orm</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>servlet-api</artifactId>
+  		<version>${servlet.version}</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>jsp-api</artifactId>
+  		<version>${jsp.version}</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>${junit.version}</version>
+  		<scope>test</scope>
+  	</dependency>
+  
+  	<dependency>
+  		<groupId>cn.itcast.dayu</groupId>
+  		<artifactId>dayu-sendmsg</artifactId>
+  		<version>2.2.2</version>
+  	</dependency>
+  	 <dependency>
+	  		<groupId>com.aliyun</groupId>
+	  		<artifactId>aliyun-java-sdk-core</artifactId>
+	  		<version>3.2.3</version>
+	  	</dependency>
+
+  	 <dependency>
+  	 	<groupId>org.apache.xbean</groupId>
+  	 	<artifactId>xbean-spring</artifactId>
+  	 	<version>3.7</version>
+  	 </dependency>
+  	 整合actieMQ
+  	 <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		消息队列 MQ
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		mq依赖包 项目启动需要jar
+		
+  </dependencies> -->
+  
+    <properties>
+     <spring.version>4.2.8.RELEASE</spring.version>
+  	<servlet.version>2.5</servlet.version>
+  	<jsp.version>2.0</jsp.version>
+  	<junit.version>4.11</junit.version>
+  	  <!-- 消息队列 active  mq -->
+  	  <activemq.version>5.2.0</activemq.version>
+  </properties>
+  <dependencies>
+  <!-- spring -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-aspects</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  <dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+        	<!-- active mq 整合spring  -->
+  	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 消息队列 MQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		<!-- mq依赖包 项目启动需要jar -->
+		<dependency>
+		    <groupId>org.apache.xbean</groupId>
+		    <artifactId>xbean-spring</artifactId>
+		    <version>3.7</version>
+		</dependency>
+	<!-- 阿里大于 依赖 -->
+		<dependency>
+  		<groupId>com.aliyun</groupId>
+  		<artifactId>aliyun-java-sdk-core</artifactId>
+  		<version>3.2.3</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>cn.itcast.dayu</groupId>
+  		<artifactId>dayu-sendmsg</artifactId>
+  		<version>2.2.2</version>
+  	</dependency>
+			<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>servlet-api</artifactId>
+  		<version>${servlet.version}</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>jsp-api</artifactId>
+  		<version>${jsp.version}</version>
+  		<scope>provided</scope>
+  	</dependency>
+  </dependencies>
+  
+  
+  
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.tomcat.maven</groupId>
+  			<artifactId>tomcat7-maven-plugin</artifactId>
+  			<version>2.1</version>
+  			<configuration>
+  				<port>9091</port>
+  				<path>/</path>
+  			</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+</project>

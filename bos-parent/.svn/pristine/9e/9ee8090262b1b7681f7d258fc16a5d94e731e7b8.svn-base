@@ -1,0 +1,31 @@
+package cn.bos.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+
+import cn.bos.domain.base.Staff;
+
+public interface StaffDao extends JpaRepository<Staff, String>,JpaSpecificationExecutor<Staff>{
+	
+	/**
+	 * 将快递员的标记改为0，以作废
+	 * @param id
+	 */
+	@Modifying
+	@Query("update Staff set deltag = '0' where id = ?")
+	void deleteStaffByUpdataDelTagTo1(String id);
+	
+	/**
+	 * 启用
+	 * @param id
+	 */
+	@Modifying
+	@Query("update Staff set deltag = '1' where id = ?")
+	void updateDelTagByIds(String id);
+	
+	@Query("from Staff where telephone = ?")
+	void findOneByTelephone(String telephone);
+
+}

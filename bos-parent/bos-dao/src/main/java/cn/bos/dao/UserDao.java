@@ -1,9 +1,41 @@
 package cn.bos.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import cn.bos.domain.user.User;
 
-public interface UserDao extends JpaRepository<User, String>{
+
+
+
+
+public interface UserDao extends JpaRepository<User, Integer>{
+	/**
+	 * 通过邮箱和密码获取用户
+	 * @param email
+	 * @param password
+	 * @return
+	 */
+	@Query
+	User findByEmailAndPassword(String email, String password);
 	
+	/**
+	 * 修改密码
+	 * @param email
+	 * @param newPwd
+	 */
+	@Modifying
+	@Query(nativeQuery=true,value="update t_user set password = ?2 where email = ?1")
+	void updatePassword(String email, String  newPwd);
+
+	@Modifying
+	@Query(nativeQuery=true,value="update t_user set password = ? where telephone = ?")
+	void updatePasswordByTelephone(String password, String telephone);
+
+
+	@Query(value="from User where telephone = ?")
+	User findUserByTelephone(String telephone);
+	
+
 }

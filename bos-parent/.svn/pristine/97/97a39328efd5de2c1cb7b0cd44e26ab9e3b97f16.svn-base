@@ -1,0 +1,67 @@
+package cn.bos.action;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+
+import cn.bos.domain.base.Staff;
+
+@Controller
+@Scope("prototype")
+@Namespace("/bc")
+@ParentPackage("bos")
+public class StaffAction extends BaseAction<Staff>{
+	
+	/**
+	 * 保存前台的添加快递员的信息
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value="staff_addStaff",results={@Result(name="staffAll",type="redirect" ,location="/WEB-INF/pages/base/staff.jsp")})
+	public String addStaff() throws Exception {
+		
+		facadService.getStaffService().save(model);
+		return "staffAll";
+	}
+	
+	/**
+	 * 获取快递员的结果集，,并且进行分页查询
+	 * @return
+	 */
+	@Action(value="staff_findAll",results={@Result(name="json", type="json")})
+	public String findAll(){
+		HashMap<String, Object> map = new HashMap<>();
+		Pageable request = new PageRequest(page-1, rows);
+		Page<Staff> page2 = facadService.getStaffService().findAll(request);
+		map.put("total", page2.getTotalElements());
+		map.put("rows", page2.getContent());
+		pushToValueStack(map);
+		return "json";
+	}
+	
+	/**
+	 * 校验添加的编码是否唯一
+	 * @return
+	 */
+	@Action(value="staff_checkId",results={@Result(name="json",type="json")})
+	public String checkId(){
+		HashMap<String , Object> map = new HashMap<>();
+		Staff staff = facadService.getStaffService().findOne(model.getId());
+		if(staff==null){
+			map.put("flag", true);
+		}else{
+			map.put("flag", false);
+		}
+		pushToValueStack(map);
+		return "json";
+	}
+}

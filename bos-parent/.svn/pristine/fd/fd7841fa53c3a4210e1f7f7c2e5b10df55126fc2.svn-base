@@ -1,0 +1,12 @@
+package cn.bos.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.bos.domain.base.Region;
+
+public interface RegionService {
+
+	void importData(ArrayList<Region> regions);
+
+}

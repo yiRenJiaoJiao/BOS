@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.bos</groupId>
+    <artifactId>bos-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>bos-domain</artifactId>
+  
+    
+  <dependencies>
+  		<dependency>
+  	<!-- spring  -->
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-aspects</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-orm</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  	</dependency>
+  	<!-- hibernate -->
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-core</artifactId>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-entitymanager</artifactId>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>slf4j-log4j12</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>c3p0</groupId>
+  		<artifactId>c3p0</artifactId>
+  	</dependency>
+ 	<!--  	<dependency>
+  		<groupId>oracle</groupId>
+  		<artifactId>oracle</artifactId>
+  	</dependency> -->
+  	
+  	<dependency>
+  		<groupId>org.springframework.data</groupId>
+  		<artifactId>spring-data-jpa</artifactId>
+  	</dependency>
+  	
+  	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-tools</artifactId>
+		</dependency>
+
+  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  	</dependency>
+
+  	<dependency>
+  		<groupId>org.apache.struts</groupId>
+  		<artifactId>struts2-convention-plugin</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.struts</groupId>
+  		<artifactId>struts2-core</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.struts</groupId>
+  		<artifactId>struts2-json-plugin</artifactId>
+  	</dependency>
+ 
+  </dependencies>
+           <!--  hibernate tools 插件 -->
+          <build>
+           <plugins>
+  			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<components>
+						<component>
+						<!--    命令 可以生成实体类对应映射文件  User.hbm.xml -->
+							<name>hbm2hbmxml</name>
+							<implementation>jdbcconfiguration</implementation>
+							<!-- 文件输出位置 -->
+							<outputDirectory>target/generated-resources/hibernate</outputDirectory>
+						</component>
+						<component>
+						<!--   命令 生成实体类的 但是不会生成注解的 -->
+							<name>hbm2java</name>
+							<implementation>jdbcconfiguration</implementation>
+							<outputDirectory>target/generated-sources/hibernate</outputDirectory>
+						</component>
+					</components>
+					<componentProperties>
+				<!-- 	   该配置文件必须存放该目录下 作用: 根据表生成实体类   定义实体类生成规范   -->
+						<revengfile>src/main/resources/reveng.xml</revengfile>
+						<!--  hibernate.properties 文件 插件需要连接数据库 配置信息 -->
+						<propertyfile>src/main/resources/hibernate.properties</propertyfile>
+						<!-- 生成实体类默认生成包名 -->
+						<packagename>cn.bos.domain.base</packagename>
+						<jdk5>true</jdk5>
+						<!-- true  生成注解  /false  没有注解   -->
+						<ejb3>true</ejb3>
+					</componentProperties>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>cglib</groupId>
+						<artifactId>cglib-nodep</artifactId>
+						<version>2.2.2</version>
+				</dependency>
+				<dependency>
+				  		<groupId>mysql</groupId>
+				  		<artifactId>mysql-connector-java</artifactId>
+				  		<version>${mysql-version}</version>
+				  		<scope>runtime</scope>
+				  	</dependency> 
+				</dependencies>
+			</plugin>
+
+		</plugins> 
+	</build>
+</project>
+  

@@ -1,0 +1,15 @@
+package cn.bos.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+
+import cn.bos.domain.base.Region;
+
+public interface RegionDao extends JpaRepository<Region, String>,JpaSpecificationExecutor<Region>{
+	@Query("from Region where province like ?1 or city like ?1 or district like ?1")
+	List<Region> findAllByQ(String  q);
+
+}

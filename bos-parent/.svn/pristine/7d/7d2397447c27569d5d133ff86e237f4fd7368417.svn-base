@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+<!--  定义生成实体类规范  match-table 需要将那些表生成实体类   match-catalog 操作是哪一个数据库 -->
+ <!-- <schema-selection  match-table="t_user"  match-catalog="bos"/> -->
+ <!-- <schema-selection  match-table="bc_staff"  match-catalog="bos"/> 
+ <schema-selection  match-table="bc_subarea"  match-catalog="bos"/> 
+ <schema-selection  match-table="bc_decidedzone"  match-catalog="bos"/> 
+ <schema-selection  match-table="bc_region"  match-catalog="bos"/>  -->
+ <schema-selection  match-table="t_standard"  match-catalog="bos"/>
+  <schema-selection  match-table="bc_region"  match-catalog="bos"/>
+ 
+  <!-- 正则表达式 .表示任意字符 * 0或者多个字符 -->
+ <!--  <schema-selection  match-table="bc_.*"  match-catalog="mavenbos"/> -->
+  <!-- 反向生成Customer -->
+<!--   <schema-selection  match-table="customers"  match-catalog="mavenbos"/>
+  <schema-selection  match-table="qp_.*"  match-catalog="mavenbos"/> -->
+  <!-- 权限表生成 -->
+  <!-- <schema-selection  match-table="auth_.*"  match-catalog="mavenbos"/>
+  <schema-selection  match-table="role_function"  match-catalog="mavenbos"/>
+  <schema-selection  match-table="role_menu"  match-catalog="mavenbos"/>
+  <schema-selection  match-table="user_role"  match-catalog="mavenbos"/>
+  <schema-selection  match-table="userinfo"  match-catalog="ssh_store"/>
+  <schema-selection  match-table="stores"  match-catalog="ssh_store"/>
+  <schema-selection  match-table="goods"  match-catalog="ssh_store"/>
+  <schema-selection  match-table="historys"  match-catalog="ssh_store"/> -->
+  
+<!-- <table name="t_user" catalog="bos"
+		class="cn.bos.domain.user.User">
+</table> -->
+
+   <table name="t_standard" catalog="bos"
+		class="cn.bos.domain.base.Standard">
+	</table> 
+
+	  <table name="bc_region" catalog="bos"
+		class="cn.bos.domain.base.Region">
+	</table>
+<!--  <table name="bc_staff" catalog="bos"
+		class="cn.bos.domain.base.Staff">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table> -->
+ <!--   <table name="bc_subarea" catalog="bos"
+		class="cn.bos.domain.base.Subarea">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>  -->
+
+  <!-- 实体类生成 -->
+ <!-- <table name="bc_decidedzone" catalog="bos"
+		class="cn.bos.domain.base.DecidedZone">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table> -->
+	<!--   <table name="auth_role" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.auth.Role">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+	 <table name="auth_menu" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.auth.Menu">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+   -->
+  
+  <!-- 取派模块 -->
+   <!--  <table name="qp_noticebill" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.qp.NoticeBill">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+    <table name="qp_workbill" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.qp.WorkBill">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+    <table name="qp_workordermanage" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.qp.WorkOrderManage">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+	
+	 -->
+	
+  
+  <!-- 定义表具体规范  -->
+ <!--  <table name="bc_staff" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.bc.Staff">
+		  定义用户实体类注解 主键策略
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+  <table name="bc_region" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.bc.Region">
+		  定义用户实体类注解 主键策略
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+  <table name="bc_subarea" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.bc.Subarea">
+		  定义用户实体类注解 主键策略
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+  <table name="bc_decidedzone" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.bc.DecidedZone"> -->
+		  <!-- 定义用户实体类注解 主键策略 -->
+		<!-- <primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table> -->
+  
+  
+<!-- 	<table name="customers" catalog="mavenbos"
+		class="cn.itcast.mavencrm.domain.Customer">
+	</table>
+	<table name="t_user" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.user.User"> -->
+		  <!-- 定义用户实体类注解 主键策略 -->
+<!-- 		<primary-key> -->
+<!-- 			<generator class="uuid"></generator> -->
+<!-- 		</primary-key> -->
+	<!-- </table> -->
+  <!-- 定义收派标准表具体规范  -->
+<!-- 	<table name="t_standard" catalog="mavenbos"
+		class="cn.itcast.mavenbos.domain.bc.Standard"> -->
+		  <!-- 定义实体类注解 主键策略 -->
+<!-- 		<primary-key> -->
+<!-- 			<generator class="uuid"></generator> -->
+<!-- 		</primary-key> -->
+	<!-- </table> -->
+
+</hibernate-reverse-engineering>

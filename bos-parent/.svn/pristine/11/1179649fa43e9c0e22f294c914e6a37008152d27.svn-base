@@ -1,0 +1,9 @@
+package cn.bos.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import cn.bos.domain.base.Staff;
+
+public interface StaffDao extends JpaRepository<Staff, String>{
+
+}

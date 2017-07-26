@@ -1,0 +1,35 @@
+package cn.bos.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import cn.bos.dao.StaffDao;
+import cn.bos.domain.base.Staff;
+import cn.bos.service.StaffService;
+
+@Service
+public class StaffServiceImpl implements StaffService{
+	@Autowired
+	private StaffDao staffDao;
+
+	@Override
+	public void save(Staff staff) {
+		staffDao.save(staff);
+	}
+
+	@Override
+	public Staff findOne(String id) {
+		return staffDao.findOne(id);
+	}
+
+	@Override
+	public Page<Staff> findAll(Pageable page) {
+		return staffDao.findAll(page);
+	}
+	
+	
+}

@@ -1,0 +1,6 @@
+#jdbc.url=jdbc:mysql:///mavenbos
+jdbc.url=jdbc:mysql:///bos
+jdbc.driverClass=com.mysql.jdbc.Driver
+jdbc.username=bos
+jdbc.password=bos
+jdbc.dialect=org.hibernate.dialect.MySQL5Dialect

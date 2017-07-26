@@ -1,0 +1,70 @@
+package cn.bos.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import cn.bos.dao.UserDao;
+import cn.bos.domain.user.User;
+import cn.bos.service.UserService;
+
+@Service(value="userService")
+@Transactional
+public class UserServiceImpl implements UserService {
+	
+	@Autowired
+	private UserDao userDao;	
+	
+	/**
+	 * 保存用户
+	 * @param user
+	 */
+	public void save(User user){
+		userDao.save(user);
+	}
+	
+	/**
+	 * 删除用户
+	 * @param user
+	 * 	 
+	 */
+	public void delete(User user){
+		userDao.delete(user);
+	}
+	/**
+	 * 获取指定用户
+	 * @param id
+	 */
+	public void findOne(Integer id){
+		userDao.findOne(id);
+	}
+	
+	/**
+	 * 获取所有用户
+	 */
+	public void findAll(){
+		userDao.findAll();
+	}
+	
+	/**
+	 * 通过邮箱和密码进行登陆
+	 */
+	@Override
+	public User findByEmailAndPassword(String email,String password){
+		return userDao.findByEmailAndPassword(email, password);
+		
+	}
+	/**
+	 * 修改密码
+	 */
+	@Override
+	public void updatePassword(String newPwd,String email) {
+		userDao.updatePassword(email, newPwd);
+		
+	}
+
+	
+
+}

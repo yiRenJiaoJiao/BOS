@@ -7,10 +7,16 @@
   </parent>
   <artifactId>bos-dao</artifactId>
   <dependencies>
-  	<dependency>
-  		<groupId>cn.bos</groupId>
-  		<artifactId>bos-domain</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
+
+  <dependency>
+  	<groupId>cn.bos</groupId>
+  	<artifactId>bos-domain</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </dependency>
+  <dependency>
+  	<groupId>cn.bos</groupId>
+  	<artifactId>bos-redis</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </dependency>
   </dependencies>
 </project>

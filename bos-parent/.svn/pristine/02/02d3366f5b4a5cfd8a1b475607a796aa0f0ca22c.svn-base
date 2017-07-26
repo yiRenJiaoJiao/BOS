@@ -1,0 +1,33 @@
+package cn.bos.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import cn.bos.dao.RegionDao;
+import cn.bos.domain.base.Region;
+import cn.bos.service.RegionService;
+
+@Service
+@Transactional
+public class RegionServiceImpl implements RegionService {
+	
+	@Autowired
+	private RegionDao regionDao;
+	
+	public void setRegionDao(RegionDao regionDao) {
+		this.regionDao = regionDao;
+	}
+
+	@Override
+	public void importData(ArrayList<Region> regions) {
+		regionDao.save(regions);
+		
+	}
+
+	
+	
+}

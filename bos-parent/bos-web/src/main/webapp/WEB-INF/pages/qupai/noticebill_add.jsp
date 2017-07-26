@@ -37,7 +37,28 @@
 				$('#noticebillForm').submit();
 			}
 		});
+		
+		loadcity(0,province)
+		
 	});
+	
+	function loadcity(pid,target){
+		target.length=1;
+		district.length = 1;
+		if(pid=="none"){
+			return ;
+		}
+		$.ajax({
+			url: "${pageContext.request.contextPath}/qp/loadCityAction_loadcity",
+			type:"post",
+			data:{"pid":pid},
+			success: function(data){
+		   		$(data).each(function(){
+		   			$(target).append("<option value="+this.id+">"+this.name+"</option>");
+		   		});
+		}});
+	}
+	
 </script>
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -93,8 +114,21 @@
 				</tr>
 				<tr>
 					<td>取件地址</td>
-					<td colspan="3"><input type="text" class="easyui-validatebox" name="pickaddress"
-						required="true" size="144"/></td>
+					<td colspan="3">
+						<input type="hidden" id="ssq" name="ssq"/>
+						<select id="province" name="province" onchange="loadcity(value,city)">
+							<option value="none">--请选择省--</option>
+						</select>
+						<select id="city" name="city" onchange="loadcity(value,district)">
+							<option value="none">--请选择市--</option>
+						</select>
+							<select id="district" name="district" >
+							<option value="none">--请选择县--</option>
+						</select>
+						<input type="text" class="easyui-validatebox" name="pickaddress" required="true" size="68"/>
+					</td>
+					
+				
 				</tr>
 				<tr>
 					<td>到达城市:</td>

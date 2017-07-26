@@ -5,5 +5,18 @@
     <artifactId>bos-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+  
+  
   <artifactId>bos-utils</artifactId>
+  <dependencies>
+  	 <dependency>
+	  		<groupId>com.aliyun</groupId>
+	  		<artifactId>aliyun-java-sdk-core</artifactId>
+	  	</dependency>
+	  	<dependency>
+			 <groupId>com.belerweb</groupId>
+			 <artifactId>pinyin4j</artifactId>
+		</dependency>
+  </dependencies>
+  
 </project>

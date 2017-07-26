@@ -1,0 +1,9 @@
+package cn.bos.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import cn.bos.domain.base.Region;
+
+public interface RegionDao extends JpaRepository<Region, String> {
+
+}

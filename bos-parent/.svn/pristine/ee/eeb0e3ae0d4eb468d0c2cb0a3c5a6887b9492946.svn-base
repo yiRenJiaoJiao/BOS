@@ -1,0 +1,27 @@
+package cn.bos.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+
+import cn.bos.domain.base.Region;
+import cn.bos.domain.base.Staff;
+
+public interface RegionService {
+
+	void importData(ArrayList<Region> regions);
+
+	void save(Region model);
+
+	Page<Region> findAll(Pageable request);
+
+	void deleteRegion(String[] arrId);
+
+	Region findOne(String id);
+
+	Page<Region> pageQuery(Pageable request, Specification<Region> regions);
+
+}

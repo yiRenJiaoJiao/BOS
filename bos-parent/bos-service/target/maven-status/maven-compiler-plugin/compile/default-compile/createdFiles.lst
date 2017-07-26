@@ -1,0 +1,5 @@
+cn\bos\service\impl\FacadService.class
+cn\bos\service\UserService.class
+cn\bos\service\impl\StaffServiceImpl.class
+cn\bos\service\impl\UserServiceImpl.class
+cn\bos\service\StaffService.class

@@ -1,0 +1,228 @@
+package cn.bos.action;
+
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.servlet.http.Cookie;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jms.JmsException;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
+
+import cn.bos.domain.user.User;
+import cn.bos.redis.utils.RandStringUtils;
+import cn.bos.sendmsg.SendMsg;
+
+@Controller("userAction")
+@Scope("prototype")
+@Namespace("/user")
+@ParentPackage("bos")
+@Result(name="login_error",location="/login.jsp")
+public class UserAction extends BaseAction<User> {
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
+	@Autowired
+	@Qualifier("jmsQueueTemplate")
+	private JmsTemplate jmsTemplate;
+	
+	@Action(value="user_sendSms",results={@Result(name="json",type="json")})
+	public String sendSms(){
+		try {
+			//获取电话号码
+			final String telephone = model.getTelephone();
+			//生成验证码
+			final String code = RandStringUtils.getCode();
+			//将电话号码和验证码放入redis中
+			redisTemplate.opsForValue().set(telephone, code, 120, TimeUnit.SECONDS);
+			//将电话好密码写入mq消息队列中
+			jmsTemplate.send("checkCodeMsg", new MessageCreator() {
+				
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					MapMessage mapMessage = session.createMapMessage();
+					mapMessage.setString("telephone", telephone);
+					mapMessage.setString("code", code);
+					return mapMessage;
+				}
+			});
+			pushToValueStack(true);
+		} catch (JmsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pushToValueStack(false);
+		}
+		
+		//跳转的页面
+		return "json";
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 退出
+	 * @return
+	 * @throws Exception
+	 */
+	
+	@Action(value="user_exitLogin",results={@Result(name="login",type="redirect",location="/login.jsp")})
+	public String exitLogin() throws Exception {
+		User user = (User) getSessionAttribute("loginUser");
+		if(user!=null){
+			//removeSessionAttriute("loginUser");
+			invalidateSession();
+		}
+		return "login";
+	}
+	/**
+	 * 接受前台的ajax请求，修改密码
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value="user_editPassword",results={@Result(name="editPassword",type="json")})
+	public String editPassword() throws Exception {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		try {
+			String newPwd = (String) getParameter("newPwd");
+			String rePwd = (String) getParameter("rePwd");
+			if(newPwd.equals(rePwd)){
+				User user = (User) getSessionAttribute("loginUser");
+				facadService.getUserService().updatePassword(newPwd,user.getEmail());
+				map.put("flag", true);
+			}else{
+				//this.addActionError("editPassword.error");
+				this.addFieldError("editPassword_error", "两次密码不一致");
+				map.put("flag", false);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("flag", false);
+			new Throwable("修改密码出现异常");
+		}
+		pushToValueStack(map);
+		return "editPassword";
+	}
+	
+	
+	@Action(value="user_checkCode",results={@Result(name="checkCode",type="json")})
+	public String checkCode() throws Exception {
+		String checkCode  = (String) getParameter("checkcode");
+		String code = (String) getSessionAttribute("key");
+		if(checkCode!=null){
+			if(checkCode.equalsIgnoreCase(code)){
+				//验证码正确，返回true
+				pushToValueStack(true);
+			}else{
+				//验证码错误，返回false
+				this.addActionError(this.getText("login.checkCode.erorr"));
+				pushToValueStack(false);
+			}
+		}else{
+			//验证码不能为空
+			this.addActionError(this.getText("login.Code.isEmpty"));
+			pushToValueStack(false);
+			
+		}
+		return "checkCode";
+	}
+	
+	
+	/**
+	 * 用户登录
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value="user_login", results={@Result(name="loginErorr",location="/login.jsp"),@Result(name="index",type="redirect",location="/index.jsp")})
+	@InputConfig(resultName="login_error")
+	public String login() throws Exception {
+		String  code =	(String) getSessionAttribute("key");
+		String checkCode = (String) getParameter("checkcode");
+		if(StringUtils.isNotBlank(checkCode)){
+			//验证码不为空，判断录入的验证码和生成的验证码是否相同
+			if (checkCode.equalsIgnoreCase(code)) {
+				//校验用户名和密码是否为空
+			
+				//相同,到数据库查询用户名和密码是否正确
+				User user = facadService.getUserService().findByEmailAndPassword(model.getEmail(), model.getPassword());
+				if (user!=null) {
+					//将user放入session中
+					setSessionAttribute("loginUser", user);
+					removeSessionAttriute("key");
+					//记住用户名和密码
+					
+					//获取前台
+						String message = getRequest().getParameter("remember");
+						if(message!=null){
+							//将用户名和密码放入cookie
+							Cookie c1 = new Cookie("email", model.getEmail());
+							c1.setMaxAge(60*60*1000*24);
+							c1.setPath("/");
+							getResponse().addCookie(c1);
+							
+							Cookie c2 = new Cookie("password", model.getPassword());
+							c2.setMaxAge(60*60*24*1000);
+							c2.setPath("/");
+							getResponse().addCookie(c2);
+						}else{
+							//将用户名和密码从cookie中移除
+							Cookie c1 = new Cookie("email", null);
+							c1.setMaxAge(60*60*1000*24);
+							c1.setPath("/");
+							getResponse().addCookie(c1);
+							
+							Cookie c2 = new Cookie("password",null);
+							c2.setMaxAge(60*60*24*1000);
+							c2.setPath("/");
+							getResponse().addCookie(c2);
+						}
+					
+					
+					//返回登陆页面
+					return "index";
+					
+				}else{
+					//用户名和密码错误，返回登陆错误页面
+					this.addActionError(this.getText("login.loginNameOrPassword.erorr"));
+					removeSessionAttriute("key");
+					return "loginErorr";
+				}
+			}else{
+				//不相同,跳转到错误页面
+				this.addActionError(this.getText("login.checkCode.erorr"));
+				removeSessionAttriute("key");
+				return "loginErorr";
+			}
+			
+		}else{
+			//验证码为空，跳转到错误页面
+			this.addActionError(this.getText("login.Code.isEmpty"));
+			return "loginErorr";
+		}
+	}
+	
+	public void SysObject(){
+		System.out.println("aaa");
+	}
+}
