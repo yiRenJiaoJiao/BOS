@@ -3,14 +3,19 @@
 
 <hibernate-reverse-engineering>
 <!--  定义生成实体类规范  match-table 需要将那些表生成实体类   match-catalog 操作是哪一个数据库 -->
- <!-- <schema-selection  match-table="t_user"  match-catalog="bos"/> -->
-<!-- <schema-selection  match-table="bc_staff"  match-catalog="bos"/> 
+ <schema-selection  match-table="t_user"  match-catalog="bos"/> 
+ <schema-selection  match-table="bc_staff"  match-catalog="bos"/> 
+  <schema-selection  match-table="qp_noticebill"  match-catalog="bos"/> 
+  <schema-selection  match-table="qp_workbill"  match-catalog="bos"/> 
+  <schema-selection  match-table="qp_workordermanage"  match-catalog="bos"/> 
+ 
+ 
  <schema-selection  match-table="bc_subarea"  match-catalog="bos"/> 
  <schema-selection  match-table="bc_decidedzone"  match-catalog="bos"/> 
  <schema-selection  match-table="bc_region"  match-catalog="bos"/> 
- <schema-selection  match-table="t_standard"  match-catalog="bos"/> -->
- <!--  <schema-selection  match-table="bc_region"  match-catalog="bos"/> -->
- <schema-selection  match-table="customers"  match-catalog="bos-consumor"/>
+ <schema-selection  match-table="t_standard"  match-catalog="bos"/> 
+<!--    <schema-selection  match-table="bc_region"  match-catalog="bos"/>  -->
+<!--  <schema-selection  match-table="customers"  match-catalog="bos-consumor"/> -->
   <!-- 正则表达式 .表示任意字符 * 0或者多个字符 -->
  <!--  <schema-selection  match-table="bc_.*"  match-catalog="mavenbos"/> -->
   <!-- 反向生成Customer -->
@@ -26,13 +31,40 @@
   <schema-selection  match-table="goods"  match-catalog="ssh_store"/>
   <schema-selection  match-table="historys"  match-catalog="ssh_store"/> -->
  
- <table name="customers" catalog="bos-consumor"
+<!--  <table name="customers" catalog="bos-consumor"
 		class="cn.bos.domain.consumor.Consumors">
-</table>
-  
-<!-- <table name="t_user" catalog="bos"
-		class="cn.bos.domain.user.User">
 </table> -->
+  
+ <table name="t_user" catalog="bos"
+		class="cn.bos.domain.user.User">
+</table>
+ <table name="bc_staff" catalog="bos"
+		class="cn.bos.domain.base.Staff">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+	
+	<table name="t_standard" catalog="bos"
+		class="cn.bos.domain.base.Standard">
+	</table> 
+
+	  <table name="bc_region" catalog="bos"
+		class="cn.bos.domain.base.Region">
+	</table>
+ 
+  <table name="bc_subarea" catalog="bos"
+		class="cn.bos.domain.base.Subarea">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
+	<table name="bc_decidedzone" catalog="bos"
+		class="cn.bos.domain.base.DecidedZone">
+		<primary-key>
+			<generator class="uuid"></generator>
+		</primary-key>
+	</table>
 
   <!--  <table name="t_standard" catalog="bos"
 		class="cn.bos.domain.base.Standard">
@@ -41,12 +73,7 @@
 	  <table name="bc_region" catalog="bos"
 		class="cn.bos.domain.base.Region">
 	</table>
-  <table name="bc_staff" catalog="bos"
-		class="cn.bos.domain.base.Staff">
-		<primary-key>
-			<generator class="uuid"></generator>
-		</primary-key>
-	</table>
+ 
   <table name="bc_subarea" catalog="bos"
 		class="cn.bos.domain.base.Subarea">
 		<primary-key>
@@ -76,26 +103,26 @@
    -->
   
   <!-- 取派模块 -->
-   <!--  <table name="qp_noticebill" catalog="mavenbos"
-		class="cn.itcast.mavenbos.domain.qp.NoticeBill">
+ <table name="qp_noticebill" catalog="bos"
+		class="cn.bos.domain.qp.Noticebill">
 		<primary-key>
 			<generator class="uuid"></generator>
 		</primary-key>
 	</table>
-    <table name="qp_workbill" catalog="mavenbos"
-		class="cn.itcast.mavenbos.domain.qp.WorkBill">
+    <table name="qp_workbill" catalog="bos"
+		class="cn.bos.domain.qp.Workbill">
 		<primary-key>
 			<generator class="uuid"></generator>
 		</primary-key>
 	</table>
-    <table name="qp_workordermanage" catalog="mavenbos"
-		class="cn.itcast.mavenbos.domain.qp.WorkOrderManage">
+    <table name="qp_workordermanage" catalog="bos"
+		class="cn.bos.domain.qp.Workordermanage">
 		<primary-key>
 			<generator class="uuid"></generator>
 		</primary-key>
 	</table>
 	
-	 -->
+	
 	
   
   <!-- 定义表具体规范  -->

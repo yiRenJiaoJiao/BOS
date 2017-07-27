@@ -1,5 +1,6 @@
 package cn.bos.dao.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
@@ -61,6 +62,34 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 		.setParameter(0, desidedZoneId).executeUpdate();
 		
 		
+	}
+
+	/**
+	 * 根据电话号码获取用户信息
+	 */
+	@Override
+	public Customers findOneCustomer(String telephone) {
+		List<Customers> list = getHibernateTemplate().find("from Customers where telephone = ?",telephone);
+		return list.isEmpty()? null:list.get(0);
+	}
+
+	@Override
+	public Customers save(Customers customer) {
+		Integer id = (Integer) getHibernateTemplate().save(customer);
+		customer.setId(id);
+		return customer;
+	}
+
+	@Override
+	public Customers findCustomersById(String customerId) {
+		List<Customers> list = getHibernateTemplate().find("from Customers where id= ?",customerId);
+		return list.isEmpty()? null:list.get(0);
+	}
+
+	@Override
+	public Customers findOneCustomerByAddress(String address) {
+		List<Customers> list = getSession().createQuery("from Customers where address = ?").setParameter(0, address).list();
+		return list.isEmpty()? null: list.get(0);
 	}
 	
 }

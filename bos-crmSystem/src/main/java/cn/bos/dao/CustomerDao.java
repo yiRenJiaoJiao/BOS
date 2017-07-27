@@ -13,5 +13,14 @@ public interface CustomerDao {
 	void updateCustomer(int i, String desidedZoneId);
 
 	void cancelAssosiation(String desidedZoneId);
+	
+	Customers findOneCustomer(String telephone);
+
+	Customers save(Customers customer);
+
+	Customers findCustomersById(String customerId);
+
+	Customers findOneCustomerByAddress(String address);
+
 
 }

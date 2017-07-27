@@ -1,0 +1,24 @@
+package cn.bos.service;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.jaxb.PageAdapter;
+import org.springframework.data.jpa.domain.Specification;
+
+import cn.bos.domain.base.Staff;
+import cn.bos.domain.base.Standard;
+
+public interface StaffService {
+	
+	void save(Staff staff);
+	Staff findOne(String id);
+	Page<Staff> findAll(Pageable page);
+	void deleteStaff(String id);
+	void deleteStaffByUpdataDelTagTo1(String id);
+	void updateDelTagByIds(String[] arr);
+	Staff findOneByTelephone(String telephone);
+	Page<Staff> pageQuery(Pageable request, Specification<Staff> specification);
+	List<Staff> findAllStaffInUse();
+}

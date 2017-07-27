@@ -83,34 +83,7 @@
 			<artifactId>fastjson</artifactId>
 		</dependency>
 		
-			<!-- restful 客户端 -->
-			<!-- 使用CXF RS开发 -->
-  		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<version>3.0.1</version>
-		</dependency>
 		
-		<!-- 使用rs客户端  -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-client</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		
-		<!-- 在CXF扩展提供者，提供转换json接口  -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-extension-providers</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-
-		<!-- cxf 扩展提供者 转换json 默认需求一个工具包  -->
-		<dependency>
-			<groupId>org.codehaus.jettison</groupId>
-			<artifactId>jettison</artifactId>
-			<version>1.3.7</version>
-		</dependency>
 		
 		
   </dependencies>

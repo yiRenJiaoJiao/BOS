@@ -17,8 +17,8 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 	
 	@Override
-	public void save(Customers customer) {
-		System.out.println("aaaa");
+	public Customers save(Customers customer) {
+		return  customerDao.save(customer);
 		
 	}
 
@@ -53,6 +53,33 @@ public class CustomerServiceImpl implements CustomerService {
 	public void updateCustomerNoDesidedZoneId(String desidedZoneId) {
 		//取消定区关联客户
 		customerDao.cancelAssosiation(desidedZoneId);
+	}
+
+	/**
+	 * 根据电话获取用户信息
+	 */
+	@Override
+	public Customers findOneCustomerByTelephone(String telephone) {
+		return customerDao.findOneCustomer(telephone);
+	}
+
+	@Override
+	public void updateCustomersAdressById(String customerId, String address) {
+		Customers customer = customerDao.findCustomersById(customerId);
+		customer.setAddress(address);
+		customerDao.save(customer);
+		
+	}
+
+	/*@Override
+	public Customers findOneCustomersById(String id) {
+		return customerDao.findCustomersById(id);
+	}*/
+
+	@Override
+	public Customers findOneCustomersByAddress(String address) {
+		
+		return customerDao.findOneCustomerByAddress(address);
 	}
 	
 	

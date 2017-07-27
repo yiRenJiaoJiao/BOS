@@ -22,10 +22,16 @@ public interface CustomerService {
 	 */
 	@POST
 	@Path("/customer/save")
-	@Consumes("application/xml")
-	public void save(Customers customer);
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	public Customers save(Customers customer);
 	
-	
+	///customer/updateCustomersAdressById/  customerId+"/"+model.getPickaddress()
+	@POST
+	@Path("/customer/updateCustomersAdressById/{customerId}/{address}")
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	public void updateCustomersAdressById(@PathParam("customerId")String customerId,@PathParam("address")String address);
 	/**
 	 * 获取地区已经关联的客户
 	 */
@@ -65,4 +71,25 @@ public interface CustomerService {
 	@Consumes({"application/xml","application/json"})
 	public void updateCustomerNoDesidedZoneId(@PathParam("desidedZoneId")String desidedZoneId);
 	
+	/**
+	 * 根据手机号获取用户信息
+	 * @param telephone
+	 * @return
+	 */
+	@GET
+	@Path("/customer/findOneCustomerByTelephone/{telephone}")
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	public Customers findOneCustomerByTelephone(@PathParam("telephone")String telephone);
+	
+	/**
+	 * 通过id获取用户信息 "/customer/findOneCustomersByAddress/"+model.getPickaddress()
+	 * @param id
+	 * @return
+	 */
+	@GET
+	@Path("/customer/findOneCustomersByAddress/{address}")
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	public Customers findOneCustomersByAddress(@PathParam("address")String address);
 }

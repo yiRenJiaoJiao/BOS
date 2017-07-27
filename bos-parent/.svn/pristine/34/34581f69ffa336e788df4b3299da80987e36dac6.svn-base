@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 不用重启服务器 -->
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 表单样式 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 国际化文件 -->
+	<constant name="struts.custom.i18n.resources" value="messages" />
+	<!-- 动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+
+	<!-- 设置自定义的拦截器栈-->
+	<package name="bos" extends="json-default">
+		<result-types >
+			<result-type name="fastJson" class="cn.bos.action.interceptor.FastJsonResult">
+			</result-type>
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="myInterceptor" class="cn.bos.action.interceptor.UserAction_login_interceptor">
+				<param name="excludeMethods">reSetPwd,login,checkCode,sendSms,smsPassword</param>
+			</interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="myInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<!-- defaultStack -->
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		
+		<!-- 配置未登陆的全局结果集 -->
+		<global-results>
+			<result name="no_login">/login.jsp</result>
+		<!-- 	<result name="input">/login.jsp</result> -->
+			<result name="json" type="json"></result>
+			<result name="findAll" type="fastJson">	
+					<param name="root">map</param>
+			</result> 
+		</global-results>
+
+		 <action name="index">
+			<result>/index.jsp</result>
+		</action> 
+		<!-- 需要进行权限控制的页面访问 -->
+		<action name="page_*_*">
+			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+	</package>
+
+</struts>

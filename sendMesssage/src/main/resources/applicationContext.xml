@@ -41,6 +41,7 @@
       <!-- 定义Queue监听器 消费普通信息 test.queue 监听器的名称 ref 消费者的实现者 -->
     <jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
         <jms:listener destination="checkCodeMsg" ref="smsConsumer1"/>
+         <jms:listener destination="bos_staff" ref="smsConsumer2"/>
     </jms:listener-container>
          
         

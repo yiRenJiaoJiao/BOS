@@ -8,9 +8,10 @@ import javax.jms.TextMessage;
 
 import org.springframework.stereotype.Component;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 
-import cn.bos.send.msg.SendMsg;
+import cn.bos.send.msg.SendMessage;
 
 @Component("smsConsumer1")
 public class SmsConsumer1 implements MessageListener {
@@ -23,14 +24,11 @@ public class SmsConsumer1 implements MessageListener {
 			String telephone = mapMassage.getString("telephone");
 			String code = mapMassage.getString("code");
 			//引入阿利大于
-			SendMsg.sendSms(telephone, code);
-		} catch (JMSException e) {
+			SendMessage.sendSms(telephone, code);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClientException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 
 }

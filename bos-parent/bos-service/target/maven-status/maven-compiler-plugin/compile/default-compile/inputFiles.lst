@@ -4,12 +4,15 @@ F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\UserServiceImpl.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\UserService.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\StaffService.java
+F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\BaseServiceInterface.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\CityService.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\FacadService.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\StandardService.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\StandardServiceImpl.java
+F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\NoticebillServiceImpl.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\StaffServiceImpl.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\CityServiceImpl.java
+F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\NoticebillService.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\impl\DecidedZoneServiceImpl.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\DecidedZoneService.java
 F:\workspace\mavenWorkSpace\bos-parent\bos-service\src\main\java\cn\bos\service\SubareaService.java
